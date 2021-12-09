@@ -19,16 +19,11 @@
   margin: 30px auto;
   width: 360px;
   height: 90px;
-  background-color: gray;
 }
 #color-palette .color {
   width: 90px;
   height: 90px;
   border: 1px solid black;
-}
-
-.buttons {
-  width: 100%;
 }
 
 #pixel-board {
