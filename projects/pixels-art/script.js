@@ -21,7 +21,7 @@ superChangeBtn = document.getElementById('super-change')
 function superChange() {
     setInterval(function() {
         generateColorsDiv()
-        }, 500) 
+        }, 499) 
 }
 superChangeBtn.addEventListener('click', superChange)
 
