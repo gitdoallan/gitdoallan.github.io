@@ -1,5 +1,5 @@
-let colorPalette = document.getElementById('color-palette')
-let changeBtn = document.getElementById('change-colors')
+const colorPalette = document.getElementById('color-palette')
+const changeBtn = document.getElementById('change-colors')
 function generateColorsDiv() {
     colorPalette.innerHTML = ''
     for (let i=0;i<4;i+=1) {
@@ -17,13 +17,24 @@ function generateColorsDiv() {
 generateColorsDiv()
 changeBtn.addEventListener('click', generateColorsDiv)
 
-superChangeBtn = document.getElementById('super-change')
+const superChangeBtn = document.getElementById('super-change')
+let isXablauActive = false
 function superChange() {
-    setInterval(function() {
+    xablau = setInterval(function() {
         generateColorsDiv()
         }, 500) 
 }
-superChangeBtn.addEventListener('click', superChange)
+
+function checkXablau() {
+    if (isXablauActive === true) {
+        clearInterval(xablau)
+        isXablauActive = false
+    } else {
+        isXablauActive = true
+        superChange()
+    }
+}
+superChangeBtn.addEventListener('click', checkXablau)
 
 let targetColor = 'rgb(0, 0, 0)'
 function pickColor(e) {
@@ -37,8 +48,8 @@ function pickColor(e) {
 }
 colorPalette.addEventListener('click', pickColor)
 
-let generateBtn = document.getElementById('generate-board')
-let pixelBoard = document.getElementById('pixel-board')
+const generateBtn = document.getElementById('generate-board')
+const pixelBoard = document.getElementById('pixel-board')
 function theBoard(pixels) {
     let boardSize = pixels*40
     let boardPixels = pixels*pixels
@@ -69,12 +80,20 @@ function checkBoard() {
 }
 generateBtn.addEventListener('click',checkBoard)
 
+let boardSizeInput = document.getElementById('board-size')
+function keypress(e) {
+    if (e.key === 'Enter') {
+        checkBoard()
+    }
+}
+boardSizeInput.addEventListener('keyup', keypress)
+
 function receiveColor(e) {
     e.target.style.backgroundColor = targetColor
 }
 pixelBoard.addEventListener('click', receiveColor)
 
-let clearBtn = document.getElementById('clear-board')
+const clearBtn = document.getElementById('clear-board')
 let pixelBoardChild = pixelBoard.children
 function clearBoard() {
     for(let i=0;i<pixelBoardChild.length;i+=1) {
